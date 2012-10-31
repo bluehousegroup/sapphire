@@ -252,7 +252,7 @@ class Folder extends File {
 			if($oldFile == $file && $i > 2) user_error("Couldn't fix $file$ext with $i", E_USER_ERROR);
 		}
 		
-		if (move_uploaded_file($tmpFile['tmp_name'], "$base/$file$ext")) {
+		if (copy($tmpFile['tmp_name'], "$base/$file$ext")) {
 			// Update with the new image
 			return $this->constructChild(basename($file . $ext));
 		} else {
