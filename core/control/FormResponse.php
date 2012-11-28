@@ -76,12 +76,11 @@ class FormResponse {
 
 		// we don't want non-ajax calls to receive javascript
 		if(isset($_REQUEST['forcehtml'])) {
-			$response->setBody(self::$non_ajax_content);			
+			return self::$non_ajax_content;			
 		} else if(isset($_REQUEST['forceajax']) || Director::is_ajax()) {
-			$response->addHeader('Content-Type', 'text/javascript');
-			$response->setBody(self::get_javascript());
+			return self::get_javascript();
 		} elseif(!empty(self::$non_ajax_content)) {
-			$response->setBody(self::$non_ajax_content);			
+			return self::$non_ajax_content;			
 		} elseif(!empty(self::$redirect_url)) {
 			Director::redirect(self::$redirect_url);
 			return null;
